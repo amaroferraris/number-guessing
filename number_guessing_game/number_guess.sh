@@ -34,7 +34,7 @@ else
     USER_GAMES=$($PSQL "SELECT MAX(game) as games_played FROM games WHERE user_id = $USER_ID")
     NEW_USER_GAME=$USER_GAMES+1
     $PSQL "INSERT INTO games(user_id, game) VALUES($USER_ID, $NEW_USER_GAME)" > /dev/null
-    echo -e "\nWelcome back, $(echo $USERNAME | sed -r 's/^ *| *$//g')! You have played $(echo $GAMES_PLAYED | sed -r 's/^ *| *$//g') games, and your best game took $(echo $BEST_GAME | sed -r 's/^ *| *$//g') guess(es)."
+    echo -e "\nWelcome back, $(echo $USERNAME | sed -r 's/^ *| *$//g')! You have played $(echo $GAMES_PLAYED | sed -r 's/^ *| *$//g') games, and your best game took $(echo $BEST_GAME | sed -r 's/^ *| *$//g') guesses."
   done
 fi
 
@@ -47,7 +47,10 @@ USER_GUESSES=$($PSQL "SELECT MAX(guesses) FROM games WHERE user_id = $USER_ID")
 
 # GENERATING RANDOM NUMBER
 SECRET_NUMBER=$(( ( RANDOM % 1000 ) + 1 ))
-# echo $SECRET_NUMBER
+echo $SECRET_NUMBER
+
+# RUNNING A GUESSES COUNTER
+GUESSES_COUNTER=0
 
 # ASKING FOR A NUMBER
 echo "Guess the secret number between 1 and 1000:"
@@ -57,22 +60,23 @@ read USER_NUM
 if [[ ! $USER_NUM =~ ^[0-9]+$ ]]
 then
   echo -e "\nThat is not an integer, guess again:"
-  $PSQL "UPDATE games SET guesses = guesses + 1 WHERE user_id = $USER_ID AND game = $USER_GAMES;" > /dev/null
+  ((GUESSES_COUNTER++))
   GUESSING_LOOP
 else
   if [[ $USER_NUM == $SECRET_NUMBER ]]
   then
-    NUMBER_OF_GUESSES=$($PSQL "SELECT MAX(guesses) as number_of_guesses FROM games WHERE user_id = $USER_ID AND game = $USER_GAMES")
-      echo -e "\nYou guessed it in $(echo $NUMBER_OF_GUESSES | sed -r 's/^ *| *$//g') tries. The secret number was $(echo $SECRET_NUMBER | sed -r 's/^ *| *$//g'). Nice job!"
+      ((GUESSES_COUNTER++))
+      $PSQL "UPDATE games SET guesses = $GUESSES_COUNTER WHERE user_id = $USER_ID AND game = $USER_GAMES;" > /dev/null
+      echo -e "\nYou guessed it in $(echo $GUESSES_COUNTER | sed -r 's/^ *| *$//g') tries. The secret number was $(echo $SECRET_NUMBER | sed -r 's/^ *| *$//g'). Nice job!"
   else
     if [[ $USER_NUM -gt $SECRET_NUMBER ]]
     then
-      $PSQL "UPDATE games SET guesses = guesses + 1 WHERE user_id = $USER_ID AND game = $USER_GAMES;" > /dev/null
+      ((GUESSES_COUNTER++))
       echo -e "\nIt's lower than that, guess again:"
       GUESSING_LOOP
     elif [[ $USER_NUM -lt $SECRET_NUMBER ]]
     then
-      $PSQL "UPDATE games SET guesses = guesses + 1 WHERE user_id = $USER_ID AND game = $USER_GAMES;" > /dev/null
+      ((GUESSES_COUNTER++))
       echo -e "\nIt's higher than that, guess again:"
       GUESSING_LOOP
     fi
