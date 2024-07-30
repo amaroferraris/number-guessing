@@ -102,22 +102,69 @@ ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.u
 -- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.games VALUES (1, 2, 86);
-INSERT INTO public.games VALUES (1, 1, 390);
+INSERT INTO public.games VALUES (1, 1, 5);
+INSERT INTO public.games VALUES (1, 2, 3);
+INSERT INTO public.games VALUES (1, 3, 1);
+INSERT INTO public.games VALUES (2, 1, 400);
+INSERT INTO public.games VALUES (2, 2, 217);
+INSERT INTO public.games VALUES (3, 1, 660);
+INSERT INTO public.games VALUES (3, 2, 823);
+INSERT INTO public.games VALUES (2, 3, 443);
+INSERT INTO public.games VALUES (2, 4, 251);
+INSERT INTO public.games VALUES (2, 5, 575);
+INSERT INTO public.games VALUES (1, 4, 1);
+INSERT INTO public.games VALUES (4, 1, 294);
+INSERT INTO public.games VALUES (4, 2, 925);
+INSERT INTO public.games VALUES (5, 1, 107);
+INSERT INTO public.games VALUES (5, 2, 682);
+INSERT INTO public.games VALUES (4, 3, 10);
+INSERT INTO public.games VALUES (4, 4, 41);
+INSERT INTO public.games VALUES (4, 5, 973);
+INSERT INTO public.games VALUES (6, 1, 269);
+INSERT INTO public.games VALUES (6, 2, 450);
+INSERT INTO public.games VALUES (7, 1, 228);
+INSERT INTO public.games VALUES (7, 2, 679);
+INSERT INTO public.games VALUES (6, 3, 13);
+INSERT INTO public.games VALUES (6, 4, 494);
+INSERT INTO public.games VALUES (6, 5, 199);
+INSERT INTO public.games VALUES (8, 1, 535);
+INSERT INTO public.games VALUES (8, 2, 309);
+INSERT INTO public.games VALUES (9, 1, 286);
+INSERT INTO public.games VALUES (9, 2, 374);
+INSERT INTO public.games VALUES (8, 3, 565);
+INSERT INTO public.games VALUES (8, 4, 968);
+INSERT INTO public.games VALUES (8, 5, 651);
+INSERT INTO public.games VALUES (10, 1, 270);
+INSERT INTO public.games VALUES (10, 2, 828);
+INSERT INTO public.games VALUES (11, 1, 188);
+INSERT INTO public.games VALUES (11, 2, 501);
+INSERT INTO public.games VALUES (10, 3, 940);
+INSERT INTO public.games VALUES (10, 4, 161);
+INSERT INTO public.games VALUES (10, 5, 964);
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.users VALUES (1, 'user_1722008382228', 2);
+INSERT INTO public.users VALUES (3, 'user_1722348200233', 2);
+INSERT INTO public.users VALUES (2, 'user_1722348200234', 5);
+INSERT INTO public.users VALUES (1, 'Amaro', 4);
+INSERT INTO public.users VALUES (5, 'user_1722348352327', 2);
+INSERT INTO public.users VALUES (4, 'user_1722348352328', 5);
+INSERT INTO public.users VALUES (7, 'user_1722348359317', 2);
+INSERT INTO public.users VALUES (6, 'user_1722348359318', 5);
+INSERT INTO public.users VALUES (9, 'user_1722348363752', 2);
+INSERT INTO public.users VALUES (8, 'user_1722348363753', 5);
+INSERT INTO public.users VALUES (11, 'user_1722348406684', 2);
+INSERT INTO public.users VALUES (10, 'user_1722348406685', 5);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 11, true);
 
 
 --
